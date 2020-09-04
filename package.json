@@ -1,0 +1,54 @@
+{
+  "name": "ghec-invitations-report-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to create a report of GitHub Enterprise Cloud invitations",
+  "keywords": [],
+  "author": {
+    "name": "GitHub Professional Services",
+    "email": "services@github.com",
+    "url": "https://services.github.com"
+  },
+  "contributors": [
+    {
+      "name": "Stefan Stölzle",
+      "email": "stoe@github.com",
+      "url": "https://github.com/stoe"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/ActionsDesk/ghec-invitations-report-action.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ActionsDesk/ghec-invitations-report-action/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js -m",
+    "pretest": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
+    "test": "eslint .",
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0",
+    "json2csv": "^5.0.1",
+    "moment": "^2.27.0"
+  },
+  "devDependencies": {
+    "@github/prettier-config": "^0.0.4",
+    "@zeit/ncc": "^0.22.3",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-github": "^4.1.1"
+  },
+  "prettier": "@github/prettier-config"
+}

@@ -1,0 +1,19 @@
+name: 'action-invitations-report'
+description: 'Create a report of organization invites'
+
+inputs:
+  token:
+    description: 'A Personal Access token with admin:org, read:user, repo, user:email scopes'
+    required: true
+  report-path:
+    description: 'Path to the report file'
+    default: 'invitation-report.csv'
+    required: false
+  enterprise:
+    description: 'GitHub Enterprise Cloud account, will require the token to have admin:org, read:enterprise, read:user, repo, user:email scopes'
+    default: ''
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

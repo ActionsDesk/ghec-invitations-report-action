@@ -17,3 +17,7 @@ inputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+
+branding:
+  icon: file-text
+  color: green

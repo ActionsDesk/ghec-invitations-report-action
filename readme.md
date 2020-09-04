@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: 'Scheduled report'
-        uses: ActionsDesk/ghec-invitations-report-action@v1
+        uses: ActionsDesk/ghec-invitations-report-action@main
         with:
           token: ${{ secrets.REPORT_TOKEN }}
           enterprise: 'my-enterprise'
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: 'On-demand report'
-        uses: ActionsDesk/ghec-invitations-report-action@v1
+        uses: ActionsDesk/ghec-invitations-report-action@main
         with:
           token: ${{ secrets.REPORT_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}

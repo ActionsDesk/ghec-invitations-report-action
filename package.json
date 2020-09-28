@@ -41,7 +41,7 @@
     "@actions/core": "^1.2.5",
     "@actions/github": "^4.0.0",
     "json2csv": "^5.0.3",
-    "moment": "^2.28.0"
+    "moment": "^2.29.0"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",

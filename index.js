@@ -40,10 +40,16 @@ async function* getOrganizations(octokit, enterprise = '', cursor = null, record
   yield records
 }
 
-async function getInvitees(octokit, org) {
-  return await octokit.paginate('GET /orgs/:org/invitations', {
+async function getInvitees(octokit, org, invitees) {
+  const invitations = await octokit.paginate('GET /orgs/:org/invitations', {
     org
   })
+
+  for (const invite of invitations) {
+    const {email, login, created_at, inviter, team_count} = invite
+
+    invitees.push({org, login, email, created_at, inviter: inviter.login, team_count})
+  }
 }
 
 ;(async () => {
@@ -73,22 +79,10 @@ async function getInvitees(octokit, org) {
       const orgs = await getOrganizations(octokit, enterprise).next()
 
       for (const org of orgs.value) {
-        const _invitations = await getInvitees(octokit, org)
-
-        for (const invite of _invitations) {
-          const {email, login, created_at, inviter, team_count} = invite
-
-          invitees.push({org, login, email, created_at, inviter: inviter.login, team_count})
-        }
+        await getInvitees(octokit, org, invitees)
       }
     } else {
-      const _invitations = await getInvitees(octokit, owner)
-
-      for (const invite of _invitations) {
-        const {email, login, created_at, inviter, team_count} = invite
-
-        invitees.push({login, email, created_at, inviter: inviter.login, team_count})
-      }
+      await getInvitees(octokit, owner, invitees)
     }
 
     const date = moment().toISOString()

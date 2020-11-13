@@ -87,12 +87,6 @@ async function getInvitees(octokit, org, invitees) {
 
     const date = dayjs().toISOString()
 
-    // If we do not have any invitees, stop here
-    if (invitees.length <= 0) {
-      setOutput(`no pending invitations for ${date}`)
-      process.exit(0)
-    }
-
     const json2csvParser = new Parser({fields})
     const csv = json2csvParser.parse(invitees)
 

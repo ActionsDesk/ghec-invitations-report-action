@@ -4,7 +4,7 @@
 const {getInput, setFailed, setOutput} = require('@actions/core')
 const github = require('@actions/github')
 
-const moment = require('moment')
+const dayjs = require('dayjs')
 const {Parser} = require('json2csv')
 
 async function* getOrganizations(octokit, enterprise = '', cursor = null, records = []) {
@@ -85,7 +85,7 @@ async function getInvitees(octokit, org, invitees) {
       await getInvitees(octokit, owner, invitees)
     }
 
-    const date = moment().toISOString()
+    const date = dayjs().toISOString()
 
     // If we do not have any invitees, stop here
     if (invitees.length <= 0) {

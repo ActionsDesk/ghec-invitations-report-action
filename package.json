@@ -40,8 +40,8 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "json2csv": "^5.0.4",
-    "moment": "^2.29.1"
+    "dayjs": "^1.9.6",
+    "json2csv": "^5.0.4"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",

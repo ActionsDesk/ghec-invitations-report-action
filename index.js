@@ -1,9 +1,10 @@
 /**
  * Invitations Report Action.
  */
+const path = require('path')
+
 const {getInput, setFailed} = require('@actions/core')
 const github = require('@actions/github')
-
 const dayjs = require('dayjs')
 const stringify = require('csv-stringify/lib/sync')
 
@@ -53,26 +54,34 @@ async function getInvitees(octokit, org, invitees) {
 }
 
 ;(async () => {
-  const token = getInput('token', {required: true})
-  const path = getInput('report-path', {required: false})
-  const enterprise = getInput('enterprise', {required: false})
-
-  const octokit = new github.getOctokit(token)
-
-  const {context} = github
-  const {owner, repo} = context.repo
-
-  const invitees = [
-    {
-      org: 'Organization',
-      login: 'Username',
-      email: 'Email',
-      created_at: 'Invitation creation date',
-      inviter: 'Inviter'
-    }
-  ]
-
   try {
+    const reportPath = getInput('report-path', {required: false}) || 'invitation-report.csv'
+
+    const filePath = path.join(process.env.GITHUB_WORKSPACE, reportPath)
+    const {dir} = path.parse(filePath)
+
+    if (dir.indexOf(process.env.GITHUB_WORKSPACE) < 0) {
+      throw new Error(`${reportPath} is not an allowed path`)
+    }
+
+    const enterprise = getInput('enterprise', {required: false})
+
+    const token = getInput('token', {required: true})
+    const octokit = new github.getOctokit(token)
+
+    const {context} = github
+    const {owner, repo} = context.repo
+
+    const invitees = [
+      {
+        org: 'Organization',
+        login: 'Username',
+        email: 'Email',
+        created_at: 'Invitation creation date',
+        inviter: 'Inviter'
+      }
+    ]
+
     if (enterprise !== '') {
       // get all orgs in the GitHub Enterprise Cloud account
       const orgs = await getOrganizations(octokit, enterprise).next()
@@ -91,7 +100,7 @@ async function getInvitees(octokit, org, invitees) {
     const opts = {
       owner,
       repo,
-      path,
+      path: reportPath,
       message: `${date} invitation report`,
       content: Buffer.from(csv).toString('base64'),
       committer: {
@@ -105,7 +114,7 @@ async function getInvitees(octokit, org, invitees) {
       const {data} = await octokit.repos.getContent({
         owner,
         repo,
-        path
+        path: reportPath
       })
 
       if (data && data.sha) opts.sha = data.sha

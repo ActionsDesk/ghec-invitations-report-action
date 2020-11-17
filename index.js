@@ -1,11 +1,11 @@
 /**
  * Invitations Report Action.
  */
-const {getInput, setFailed, setOutput} = require('@actions/core')
+const {getInput, setFailed} = require('@actions/core')
 const github = require('@actions/github')
 
 const dayjs = require('dayjs')
-const {Parser} = require('json2csv')
+const stringify = require('csv-stringify/lib/sync')
 
 async function* getOrganizations(octokit, enterprise = '', cursor = null, records = []) {
   const {
@@ -46,9 +46,9 @@ async function getInvitees(octokit, org, invitees) {
   })
 
   for (const invite of invitations) {
-    const {email, login, created_at, inviter, team_count} = invite
+    const {email, login, created_at, inviter} = invite
 
-    invitees.push({org, login, email, created_at, inviter: inviter.login, team_count})
+    invitees.push({org, login, email, created_at, inviter: inviter.login})
   }
 }
 
@@ -62,19 +62,18 @@ async function getInvitees(octokit, org, invitees) {
   const {context} = github
   const {owner, repo} = context.repo
 
-  const invitees = []
-
-  let fields = [
-    {label: 'Username', value: 'login'},
-    {label: 'Email', value: 'email'},
-    {label: 'Invitation creation date', value: 'created_at'},
-    {label: 'Inviter', value: 'inviter'}
+  const invitees = [
+    {
+      org: 'Organization',
+      login: 'Username',
+      email: 'Email',
+      created_at: 'Invitation creation date',
+      inviter: 'Inviter'
+    }
   ]
 
   try {
     if (enterprise !== '') {
-      fields = [{label: 'Organization', value: 'org'}, ...fields]
-
       // get all orgs in the GitHub Enterprise Cloud account
       const orgs = await getOrganizations(octokit, enterprise).next()
 
@@ -85,10 +84,9 @@ async function getInvitees(octokit, org, invitees) {
       await getInvitees(octokit, owner, invitees)
     }
 
-    const date = dayjs().toISOString()
+    const csv = stringify(invitees, {})
 
-    const json2csvParser = new Parser({fields})
-    const csv = json2csvParser.parse(invitees)
+    const date = dayjs().toISOString()
 
     const opts = {
       owner,

@@ -42,7 +42,7 @@ async function* getOrganizations(octokit, enterprise = '', cursor = null, record
 }
 
 async function getInvitees(octokit, org, invitees) {
-  const invitations = await octokit.paginate('GET /orgs/:org/invitations', {
+  const invitations = await octokit.paginate(octokit.orgs.listPendingInvitations,{
     org
   })
 
@@ -69,8 +69,7 @@ async function getInvitees(octokit, org, invitees) {
     const token = getInput('token', {required: true})
     const octokit = new github.getOctokit(token)
 
-    const {context} = github
-    const {owner, repo} = context.repo
+    const {owner, repo} = github.context.repo
 
     const invitees = [
       {

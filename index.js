@@ -42,7 +42,7 @@ async function* getOrganizations(octokit, enterprise = '', cursor = null, record
 }
 
 async function getInvitees(octokit, org, invitees) {
-  const invitations = await octokit.paginate(octokit.orgs.listPendingInvitations,{
+  const invitations = await octokit.paginate(octokit.orgs.listPendingInvitations, {
     org
   })
 

@@ -11,8 +11,13 @@ inputs:
     required: false
   enterprise:
     description: 'GitHub Enterprise Cloud account, will require the token to have admin:org, read:enterprise, read:user, repo, user:email scopes'
-    default: ''
     required: false
+
+outputs:
+  base-sha:
+    description: 'Report base SHA'
+  head-sha:
+    description: 'Report head SHA'
 
 runs:
   using: 'node12'

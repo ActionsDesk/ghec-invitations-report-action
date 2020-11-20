@@ -14,17 +14,17 @@ on:
     # Runs at 00:00 UTC on the first of every month
     - cron: '0 0 1 * *'
 
-name: 'Invitation report'
+name: Scheduled invitations report
 
 jobs:
   report:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Scheduled report'
+      - name: Create invitations report
         uses: ActionsDesk/ghec-invitations-report-action@main
         with:
-          token: ${{ secrets.REPORT_TOKEN }}
+          token: ${{ secrets.ADMIN_TOKEN }}
           enterprise: 'my-enterprise'
           report-path: 'reports/enterprise-invitations.csv'
 ```
@@ -39,23 +39,23 @@ on:
       enterprise:
         description: 'GitHub Enterprise Cloud account, if omitted the report will target the repository organization only'
         required: false
-        default: ''
+        default: 'my-enterprise'
       report-path:
         description: 'Path to the report file'
         default: 'reports/invitations.csv'
         required: false
 
-name: 'Invitation report'
+name: Invitations
 
 jobs:
   report:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'On-demand report'
+      - name: Create invitations report
         uses: ActionsDesk/ghec-invitations-report-action@main
         with:
-          token: ${{ secrets.REPORT_TOKEN }}
+          token: ${{ secrets.ADMIN_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}
           report-path: ${{ github.event.inputs.report-path }}
 ```
@@ -64,13 +64,20 @@ jobs:
 
 ### Action Inputs
 
-| Name          | Description                                                                                                                              | Default                 | Required |
-| :------------ | :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- | :------- |
-| `token`       | A `admin:org`, `read:user`, `repo`, `user:email` scoped [PAT]                                                                            |                         | `true`   |
-| `report-path` | Path within the repository to create the report CSV file                                                                                 | `invitation-report.csv` | `false`  |
-| `enterprise`  | GitHub Enterprise Cloud account, will require `admin:org`, `read:enterprise`, `read:user`, `repo`, `user:email` scoped [PAT] for `token`.  | `''`                    | `false`  |
+| Name          | Description                                                                                                                               | Default                 | Required |
+| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- | :------- |
+| `token`       | A `admin:org`, `read:user`, `repo`, `user:email` scoped [PAT]                                                                             |                         | `true`   |
+| `report-path` | Path within the repository to create the report CSV file                                                                                  | `invitation-report.csv` | `false`  |
+| `enterprise`  | GitHub Enterprise Cloud account, will require `admin:org`, `read:enterprise`, `read:user`, `repo`, `user:email` scoped [PAT] for `token`. |                         | `false`  |
 
 Note: If the `enterprise` input is omitted, the report will only be created for the organization the repository belongs to.
+
+### Action Outputs
+
+| Name       | Description                                                                            |
+| :--------- | :------------------------------------------------------------------------------------- |
+| `base-sha` | Report base SHA, needed for https://github.com/ActionsDesk/ghec-report-reinvite-action |
+| `head-sha` | Report head SHA, needed for https://github.com/ActionsDesk/ghec-report-reinvite-action |
 
 ## License
 

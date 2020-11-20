@@ -123,7 +123,16 @@ async function getInvitees(octokit, org, invitees) {
       // do nothing
     }
 
-    await octokit.repos.createOrUpdateFileContents(opts)
+    const {
+      data: {
+        commit: {parents, sha: after}
+      }
+    } = await octokit.repos.createOrUpdateFileContents(opts)
+
+    const before = parents.length > 0 ? parents[0].sha : ''
+
+    core.setOutput('base-sha', before)
+    core.setOutput('head-sha', after)
   } catch (err) {
     core.setFailed(err.message)
   }

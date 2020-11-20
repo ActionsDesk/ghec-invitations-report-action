@@ -3,7 +3,7 @@
  */
 const path = require('path')
 
-const {getInput, setFailed} = require('@actions/core')
+const core = require('@actions/core')
 const github = require('@actions/github')
 const dayjs = require('dayjs')
 const stringify = require('csv-stringify/lib/sync')
@@ -55,7 +55,7 @@ async function getInvitees(octokit, org, invitees) {
 
 ;(async () => {
   try {
-    const reportPath = getInput('report-path', {required: false}) || 'invitation-report.csv'
+    const reportPath = core.getInput('report-path', {required: false}) || 'invitation-report.csv'
 
     const filePath = path.join(process.env.GITHUB_WORKSPACE, reportPath)
     const {dir} = path.parse(filePath)
@@ -64,9 +64,9 @@ async function getInvitees(octokit, org, invitees) {
       throw new Error(`${reportPath} is not an allowed path`)
     }
 
-    const enterprise = getInput('enterprise', {required: false})
+    const enterprise = core.getInput('enterprise', {required: false})
 
-    const token = getInput('token', {required: true})
+    const token = core.getInput('token', {required: true})
     const octokit = new github.getOctokit(token)
 
     const {owner, repo} = github.context.repo
@@ -123,6 +123,6 @@ async function getInvitees(octokit, org, invitees) {
 
     await octokit.repos.createOrUpdateFileContents(opts)
   } catch (err) {
-    setFailed(err.message)
+    core.setFailed(err.message)
   }
 })()

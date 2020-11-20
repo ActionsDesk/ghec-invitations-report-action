@@ -116,7 +116,9 @@ async function getInvitees(octokit, org, invitees) {
         path: reportPath
       })
 
-      if (data && data.sha) opts.sha = data.sha
+      if (data && data.sha) {
+        opts.sha = data.sha
+      }
     } catch (err) {
       // do nothing
     }

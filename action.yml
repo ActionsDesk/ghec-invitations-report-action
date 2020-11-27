@@ -12,6 +12,14 @@ inputs:
   enterprise:
     description: 'GitHub Enterprise Cloud account, will require the token to have admin:org, read:enterprise, read:user, repo, user:email scopes'
     required: false
+  committer-name:
+    description: 'The name of the committer that will appear in the Git history'
+    default: 'invitation-reporter[bot]'
+    required: false
+  committer-email:
+    description: 'The committer email that will appear in the Git history'
+    default: 'invitation@reporter'
+    required: false
 
 outputs:
   base-sha:

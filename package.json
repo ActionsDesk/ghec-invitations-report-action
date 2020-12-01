@@ -1,6 +1,6 @@
 {
   "name": "ghec-invitations-report-action",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "GitHub Action to create a report of GitHub Enterprise Cloud invitations",
   "keywords": [],
   "author": {

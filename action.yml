@@ -14,11 +14,11 @@ inputs:
     required: false
   committer-name:
     description: 'The name of the committer that will appear in the Git history'
-    default: 'invitation-reporter[bot]'
+    default: 'github-actions'
     required: false
   committer-email:
     description: 'The committer email that will appear in the Git history'
-    default: 'invitation@reporter'
+    default: 'github-actions@github.com'
     required: false
 
 outputs:

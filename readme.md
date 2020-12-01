@@ -64,11 +64,13 @@ jobs:
 
 ### Action Inputs
 
-| Name          | Description                                                                                                                               | Default                 | Required |
-| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- | :------- |
-| `token`       | A `admin:org`, `read:user`, `repo`, `user:email` scoped [PAT]                                                                             |                         | `true`   |
-| `report-path` | Path within the repository to create the report CSV file                                                                                  | `invitation-report.csv` | `false`  |
-| `enterprise`  | GitHub Enterprise Cloud account, will require `admin:org`, `read:enterprise`, `read:user`, `repo`, `user:email` scoped [PAT] for `token`. |                         | `false`  |
+| Name             | Description                                                                                                                               | Default                   | Required |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------- | :------------------------ | :------- |
+| `token`          | A `admin:org`, `read:user`, `repo`, `user:email` scoped [PAT]                                                                             |                           | `true`   |
+| `report-path`    | Path within the repository to create the report CSV file                                                                                  | `invitation-report.csv`   | `false`  |
+| `enterprise`     | GitHub Enterprise Cloud account, will require `admin:org`, `read:enterprise`, `read:user`, `repo`, `user:email` scoped [PAT] for `token`. |                           | `false`  |
+| `committer-name` | The name of the committer to be displayed in the history                                                                                  | `invitation-reporter[bot]`| `false`  |
+| `committer-email`| The email of the committer to be displayed in the history                                                                                 | `invitation@reporter`     | `false`  |
 
 Note: If the `enterprise` input is omitted, the report will only be created for the organization the repository belongs to.
 

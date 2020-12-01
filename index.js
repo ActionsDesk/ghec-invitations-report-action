@@ -56,6 +56,8 @@ async function getInvitees(octokit, org, invitees) {
 ;(async () => {
   try {
     const reportPath = core.getInput('report-path', {required: false}) || 'invitation-report.csv'
+    const committerName = core.getInput('committer-name', {required: false}) || 'invitation-reporter[bot]'
+    const committerEmail = core.getInput('committer-email', {required: false}) || 'invitation@reporter'
 
     const filePath = path.join(process.env.GITHUB_WORKSPACE, reportPath)
     const {dir} = path.parse(filePath)
@@ -103,8 +105,8 @@ async function getInvitees(octokit, org, invitees) {
       message: `${date} invitation report`,
       content: Buffer.from(csv).toString('base64'),
       committer: {
-        name: 'invitation-reporter[bot]',
-        email: 'invitation@reporter'
+        name: committerName,
+        email: committerEmail
       }
     }
 

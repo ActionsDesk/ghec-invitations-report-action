@@ -47,7 +47,7 @@
     "@github/prettier-config": "^0.0.4",
     "@zeit/ncc": "^0.22.3",
     "eslint": "^7.15.0",
-    "eslint-config-prettier": "^7.0.0",
+    "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-github": "^4.1.1"
   },
   "prettier": "@github/prettier-config"

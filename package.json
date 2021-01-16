@@ -46,7 +46,7 @@
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",
     "@zeit/ncc": "^0.22.3",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-github": "^4.1.1"
   },

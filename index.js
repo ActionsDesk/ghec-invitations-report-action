@@ -8,7 +8,7 @@ const github = require('@actions/github')
 const dayjs = require('dayjs')
 const stringify = require('csv-stringify/lib/sync')
 
-async function* getOrganizations(octokit, enterprise = '', cursor = null, records = []) {
+async function getOrganizations(octokit, enterprise = '', cursor = null, records = []) {
   const {
     enterprise: {
       organizations: {nodes, pageInfo}
@@ -35,10 +35,10 @@ async function* getOrganizations(octokit, enterprise = '', cursor = null, record
   }
 
   if (pageInfo.hasNextPage) {
-    await getOrganizations(octokit, enterprise, pageInfo.endCursor, records).next()
+    await getOrganizations(octokit, enterprise, pageInfo.endCursor, records)
   }
 
-  yield records
+  return records
 }
 
 async function getInvitees(octokit, org, invitees) {
@@ -85,9 +85,9 @@ async function getInvitees(octokit, org, invitees) {
 
     if (enterprise !== '') {
       // get all orgs in the GitHub Enterprise Cloud account
-      const orgs = await getOrganizations(octokit, enterprise).next()
+      const orgs = await getOrganizations(octokit, enterprise)
 
-      for (const org of orgs.value) {
+      for (const org of orgs) {
         await getInvitees(octokit, org, invitees)
       }
     } else {

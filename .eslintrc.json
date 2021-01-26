@@ -1,13 +1,14 @@
 {
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
-  "plugins": ["github"],
+  "plugins": ["github", "jest"],
   "extends": ["plugin:github/recommended"],
   "rules": {
     "camelcase": "off"

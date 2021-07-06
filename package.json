@@ -32,7 +32,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js -m",
+    "build": "npx @vercel/ncc build index.js --out dist --license licenses.txt --quiet --minify",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
     "test": "eslint .",
     "start": "node ./index.js"
@@ -41,12 +41,12 @@
     "@actions/core": "^1.4.0",
     "@actions/github": "^5.0.0",
     "csv-stringify": "^5.6.2",
-    "dayjs": "^1.10.5"
+    "dayjs": "^1.10.6"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",
     "@vercel/ncc": "^0.28.6",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-github": "^4.1.3"
   },

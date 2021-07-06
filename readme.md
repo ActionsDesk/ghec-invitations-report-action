@@ -2,7 +2,7 @@
 
 > GitHub Action to create a report of GitHub Enterprise Cloud invitations
 
-[![Test](https://github.com/ActionsDesk/ghec-invitations-report-action/workflows/Test/badge.svg)](https://github.com/ActionsDesk/ghec-invitations-report-action/actions?query=workflow%3ATest) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![test](https://github.com/ActionsDesk/ghec-invitations-report-action/actions/workflows/test.yml/badge.svg)](https://github.com/ActionsDesk/ghec-invitations-report-action/actions/workflows/test.yml) [![codeql](https://github.com/ActionsDesk/ghec-invitations-report-action/actions/workflows/codeql.yml/badge.svg)](https://github.com/ActionsDesk/ghec-invitations-report-action/actions/workflows/codeql.yml) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 ## Usage
 
@@ -64,13 +64,13 @@ jobs:
 
 ### Action Inputs
 
-| Name             | Description                                                                                                                               | Default                   | Required |
-| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------- | :------------------------ | :------- |
-| `token`          | A `admin:org`, `read:user`, `repo`, `user:email` scoped [PAT]                                                                             |                           | `true`   |
-| `report-path`    | Path within the repository to create the report CSV file                                                                                  | `invitation-report.csv`   | `false`  |
-| `enterprise`     | GitHub Enterprise Cloud account, will require `admin:org`, `read:enterprise`, `read:user`, `repo`, `user:email` scoped [PAT] for `token`. |                           | `false`  |
-| `committer-name` | The name of the committer to be displayed in the history                                                                                  | `invitation-reporter[bot]`| `false`  |
-| `committer-email`| The email of the committer to be displayed in the history                                                                                 | `invitation@reporter`     | `false`  |
+| Name              | Description                                                                                                                               | Default                    | Required |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------- | :------------------------- | :------- |
+| `token`           | A `admin:org`, `read:user`, `repo`, `user:email` scoped [PAT]                                                                             |                            | `true`   |
+| `report-path`     | Path within the repository to create the report CSV file                                                                                  | `invitation-report.csv`    | `false`  |
+| `enterprise`      | GitHub Enterprise Cloud account, will require `admin:org`, `read:enterprise`, `read:user`, `repo`, `user:email` scoped [PAT] for `token`. |                            | `false`  |
+| `committer-name`  | The name of the committer to be displayed in the history                                                                                  | `invitation-reporter[bot]` | `false`  |
+| `committer-email` | The email of the committer to be displayed in the history                                                                                 | `invitation@reporter`      | `false`  |
 
 Note: If the `enterprise` input is omitted, the report will only be created for the organization the repository belongs to.
 

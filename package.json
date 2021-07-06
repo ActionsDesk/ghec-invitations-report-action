@@ -32,7 +32,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npx @vercel/ncc build index.js --out dist --license licenses.txt --quiet --minify",
+    "build": "npx @vercel/ncc build src/index.js --out dist --license licenses.txt --quiet --minify",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
     "test": "npx eslint . && npx jest",
     "start": "node ./src/index.js"

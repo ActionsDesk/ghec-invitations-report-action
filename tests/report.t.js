@@ -18,25 +18,28 @@ github.getOctokit = jest.fn().mockReturnValue({
       }
     }
   }),
-  orgs: {
-    listPendingInvitations: jest.fn().mockImplementation(() => []),
-    listFailedInvitations: jest.fn().mockImplementation(() => [])
-  },
-  repos: {
-    createOrUpdateFileContents: jest.fn().mockImplementation(() => {
-      return {
-        data: {
-          commit: {parents: [{sha: 'base'}], sha: 'head'}
+  rest: {
+    orgs: {
+      listPendingInvitations: jest.fn().mockImplementation(() => []),
+      listFailedInvitations: jest.fn().mockImplementation(() => [])
+    },
+    repos: {
+      createOrUpdateFileContents: jest.fn().mockImplementation(() => {
+        return {
+          data: {
+            commit: {parents: [{sha: 'base'}], sha: 'head'}
+          }
         }
-      }
-    }),
-    getContent: jest.fn()
+      }),
+      getContent: jest.fn()
+    }
   }
 })
 
 describe('report.js', () => {
   let octokit
   let options
+  let committer
   let content
   let now
 
@@ -45,8 +48,6 @@ describe('report.js', () => {
 
     options = {
       fp: 'report.csv',
-      name: 'test[bot]',
-      email: 'test@example.com',
       owner: 'owner',
       repo: 'repo'
     }
@@ -54,6 +55,10 @@ describe('report.js', () => {
     Report.getOrganizations = jest.fn().mockReturnValue(['foo', 'bar'])
 
     const csv = stringify([Report.header], {})
+    committer = {
+      name: 'github-actions[bot]',
+      email: '41898282+github-actions[bot]@users.noreply.github.com'
+    }
     content = Buffer.from(csv).toString('base64')
 
     now = new Date().toISOString()
@@ -81,7 +86,7 @@ describe('report.js', () => {
   })
 
   test('requires parameters', async () => {
-    expect.assertions(7)
+    expect.assertions(5)
 
     let report
 
@@ -91,8 +96,6 @@ describe('report.js', () => {
 
     expect(report.octokit).toBeInstanceOf(Object)
     expect(report.path).toBe('report.csv')
-    expect(report.name).toBe('test[bot]')
-    expect(report.email).toBe('test@example.com')
     expect(report.owner).toBe('owner')
     expect(report.repo).toBe('repo')
   })
@@ -159,10 +162,7 @@ describe('report.js', () => {
       path: 'report.csv',
       message: `${now} invitation report`,
       content,
-      committer: {
-        name: 'test[bot]',
-        email: 'test@example.com'
-      }
+      committer
     })
   })
 
@@ -184,10 +184,7 @@ describe('report.js', () => {
       path: 'report.csv',
       message: `${now} invitation report`,
       content,
-      committer: {
-        name: 'test[bot]',
-        email: 'test@example.com'
-      },
+      committer,
       sha: 'a'
     })
   })

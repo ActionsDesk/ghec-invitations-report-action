@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Create invitations report
-        uses: ActionsDesk/ghec-invitations-report-action@main
+        uses: ActionsDesk/ghec-invitations-report-action@v2.2.2
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
           enterprise: 'my-enterprise'
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Create invitations report
-        uses: ActionsDesk/ghec-invitations-report-action@main
+        uses: ActionsDesk/ghec-invitations-report-action@v2.2.2
         with:
           token: ${{ secrets.ADMIN_TOKEN }}
           enterprise: ${{ github.event.inputs.enterprise }}

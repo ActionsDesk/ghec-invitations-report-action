@@ -32,10 +32,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npx @vercel/ncc build index.js --out dist --license licenses.txt --quiet --minify",
+    "build": "npx @vercel/ncc build src/index.js --out dist --license licenses.txt --quiet --minify",
     "pretest": "npx eslint-config-prettier .eslintrc.json",
-    "test": "eslint .",
-    "start": "node ./index.js"
+    "test": "eslint . && jest",
+    "start": "node ./src/index.js"
   },
   "dependencies": {
     "@actions/core": "^1.4.0",
@@ -45,10 +45,17 @@
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.4",
-    "@vercel/ncc": "^0.28.6",
     "eslint": "^7.30.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-github": "^4.1.3"
+    "eslint-plugin-github": "^4.1.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.6"
   },
-  "prettier": "@github/prettier-config"
+  "prettier": "@github/prettier-config",
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.t.js"
+    ],
+    "verbose": false
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "ghec-invitations-report-action",
-  "version": "2.2.2",
+  "version": "3.0.0",
   "description": "GitHub Action to create a report of GitHub Enterprise Cloud invitations",
   "keywords": [],
   "author": {
@@ -27,8 +27,8 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "engines": {
-    "node": ">=12",
-    "npm": ">=6"
+    "node": ">=14",
+    "npm": ">=7"
   },
   "main": "index.js",
   "scripts": {

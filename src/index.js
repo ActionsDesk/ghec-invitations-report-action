@@ -30,7 +30,7 @@ const run = async () => {
       email: committerEmail,
       owner,
       repo,
-      enterprise
+      enterprise,
     })
     report.reportDate = dayjs().toISOString()
     const {before, after} = await report.create()

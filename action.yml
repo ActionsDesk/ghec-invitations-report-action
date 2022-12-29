@@ -1,28 +1,4 @@
-name: 'action-invitations-report'
-description: 'Create a report of organization invites'
-
-inputs:
-  token:
-    description: 'A Personal Access token with admin:org, read:user, repo, user:email scopes'
-    required: true
-  report_path:
-    description: 'Path to the report file'
-    default: 'invitation-report.csv'
-    required: false
-  enterprise:
-    description: 'GitHub Enterprise Cloud account, will require the token to have admin:org, read:enterprise, read:user, repo, user:email scopes'
-    required: false
-
-outputs:
-  base_sha:
-    description: 'Report base SHA'
-  head_sha:
-    description: 'Report head SHA'
-
-runs:
-  using: 'node12'
-  main: 'dist/index.js'
-
-branding:
-  icon: file-text
-  color: green
+©iËb¢x§¾+Z¶*'²·©¢»]zÇ+Š›b¢p«y«^j·©¢»h~Šàjx³jØ¨)ïŠ×¬Šzn¶Ëh‘éİzÇ+Š›b¢pz»(©@qÇ¬²Ú$z|"¶š)è®
+ŞiÛ¬zºŞ¦‹¬z·¦j)lrŠ^²·ªº*ŞvÚîz·©¢»ijØ]zÇ+Š›b¢sÚ¶h¶«zš+µø¥y×ŸjémŠ{âµ«b¢zŞ¦ŠírËëz«¢­ç_j[z{^®šâ±ç^±Êâ¦Ø¨œh­æÄ×«¦¸¬x)h¹Öœr‹§·¥–·ªº*Ş¶­¢G§¶ˆZ½æš)è®
+Şi×§µêé®+­æºÇ«­êhºÇ«zf¢–Ç(¥ë+z«¢­ç_j[¢ëiºÛjÇ¬…§^±Êâ¦Ø¨©¢»[jÇ’^iÛ!i×¬r¸©¶*'Eêh®Ø^iÔ‡»§²ë"	èuíz™¨§v+-ş)İ{ìn¶§v)à‰Ê'~)^µìmr‰h®
+Şz

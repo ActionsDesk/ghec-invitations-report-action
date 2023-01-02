@@ -29,7 +29,7 @@ describe('index.js', () => {
 
     context.repo = {
       owner: 'owner',
-      repo: 'repo'
+      repo: 'repo',
     }
 
     const report = new Report()
@@ -60,7 +60,7 @@ describe('index.js', () => {
 
     context.repo = {
       owner: 'owner',
-      repo: 'repo'
+      repo: 'repo',
     }
 
     const setFailedSpy = jest.spyOn(core, 'setFailed').mockReturnValue('')

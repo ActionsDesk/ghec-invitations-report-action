@@ -6,34 +6,34 @@ const Report = require('../src/report')
 
 github.getOctokit = jest.fn().mockReturnValue({
   log: {
-    info: jest.fn()
+    info: jest.fn(),
   },
   graphql: jest.fn().mockImplementation(() => {
     return {
       enterprise: {
         organizations: {
           nodes: [{login: 'foo'}, {login: 'bar'}],
-          pageInfo: {hasNextPage: false, endCursor: null}
-        }
-      }
+          pageInfo: {hasNextPage: false, endCursor: null},
+        },
+      },
     }
   }),
   rest: {
     orgs: {
       listPendingInvitations: jest.fn().mockImplementation(() => []),
-      listFailedInvitations: jest.fn().mockImplementation(() => [])
+      listFailedInvitations: jest.fn().mockImplementation(() => []),
     },
     repos: {
       createOrUpdateFileContents: jest.fn().mockImplementation(() => {
         return {
           data: {
-            commit: {parents: [{sha: 'base'}], sha: 'head'}
-          }
+            commit: {parents: [{sha: 'base'}], sha: 'head'},
+          },
         }
       }),
-      getContent: jest.fn()
-    }
-  }
+      getContent: jest.fn(),
+    },
+  },
 })
 
 describe('report.js', () => {
@@ -49,7 +49,7 @@ describe('report.js', () => {
     options = {
       fp: 'report.csv',
       owner: 'owner',
-      repo: 'repo'
+      repo: 'repo',
     }
 
     Report.getOrganizations = jest.fn().mockReturnValue(['foo', 'bar'])
@@ -57,7 +57,7 @@ describe('report.js', () => {
     const csv = stringify([Report.header], {})
     committer = {
       name: 'github-actions[bot]',
-      email: '41898282+github-actions[bot]@users.noreply.github.com'
+      email: '41898282+github-actions[bot]@users.noreply.github.com',
     }
     content = Buffer.from(csv).toString('base64')
 
@@ -162,7 +162,7 @@ describe('report.js', () => {
       path: 'report.csv',
       message: `${now} invitation report`,
       content,
-      committer
+      committer,
     })
   })
 
@@ -185,7 +185,7 @@ describe('report.js', () => {
       message: `${now} invitation report`,
       content,
       committer,
-      sha: 'a'
+      sha: 'a',
     })
   })
 })

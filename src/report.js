@@ -70,8 +70,8 @@ class Report {
   async getOrganizations(cursor = null, records = []) {
     const {
       enterprise: {
-        organizations: {nodes, pageInfo}
-      }
+        organizations: {nodes, pageInfo},
+      },
     } = await this.octokit.graphql(
       `query ($enterprise: String!, $cursor: String = null) {
   enterprise(slug: $enterprise) {
@@ -86,7 +86,7 @@ class Report {
     }
   }
 }`,
-      {enterprise: this.enterprise, cursor}
+      {enterprise: this.enterprise, cursor},
     )
 
     for (const node of nodes) {
@@ -110,7 +110,7 @@ class Report {
   async getPendingInvitations(org, invitees) {
     try {
       const invitations = await this.octokit.paginate(this.octokit.rest.orgs.listPendingInvitations, {
-        org
+        org,
       })
 
       for (const invite of invitations) {
@@ -123,7 +123,7 @@ class Report {
           created_at: dayjs(created_at).toISOString(),
           failed_at: null,
           failed_reason: null,
-          inviter: inviter.login
+          inviter: inviter.login,
         })
       }
     } catch (error) {
@@ -141,7 +141,7 @@ class Report {
   async getFailedInvitations(org, invitees) {
     try {
       const invitations = await this.octokit.paginate(this.octokit.rest.orgs.listFailedInvitations, {
-        org
+        org,
       })
 
       for (const invite of invitations) {
@@ -154,7 +154,7 @@ class Report {
           created_at: dayjs(created_at).toISOString(),
           failed_at: dayjs(failed_at).toISOString(),
           failed_reason,
-          inviter: inviter.login
+          inviter: inviter.login,
         })
       }
     } catch (error) {
@@ -175,7 +175,7 @@ class Report {
       const {data} = await octokit.rest.repos.getContent({
         owner,
         repo,
-        path
+        path,
       })
 
       if (data && data.sha) {
@@ -198,8 +198,8 @@ class Report {
   async pushReport(opts) {
     const {
       data: {
-        commit: {parents, sha: head_sha}
-      }
+        commit: {parents, sha: head_sha},
+      },
     } = await this.octokit.rest.repos.createOrUpdateFileContents(opts)
 
     const base_sha = parents.length > 0 ? parents[0].sha : ''
@@ -243,8 +243,8 @@ class Report {
       content: Buffer.from(csv).toString('base64'),
       committer: {
         name,
-        email
-      }
+        email,
+      },
     }
 
     const sha = await this.getReportSha()
@@ -257,7 +257,7 @@ class Report {
 
     return {
       base_sha,
-      head_sha
+      head_sha,
     }
   }
 
@@ -272,7 +272,7 @@ class Report {
       created_at: 'Invitation creation date',
       failed_at: 'Invitation failed date',
       failed_reason: 'Invitation failed reason',
-      inviter: 'Inviter'
+      inviter: 'Inviter',
     }
   }
 

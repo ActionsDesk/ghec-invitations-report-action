@@ -44,7 +44,7 @@
     "dayjs": "^1.11.6"
   },
   "devDependencies": {
-    "@github/prettier-config": "^0.0.4",
+    "@github/prettier-config": "^0.0.6",
     "eslint": "^8.26.0",
     "eslint-plugin-github": "^4.6.0",
     "eslint-plugin-jest": "^27.1.3",

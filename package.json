@@ -41,7 +41,7 @@
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
     "csv-stringify": "^5.7.4, <6",
-    "dayjs": "^1.11.7"
+    "dayjs": "^1.11.9"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.6",

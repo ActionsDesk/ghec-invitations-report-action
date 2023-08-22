@@ -1,28 +1,28 @@
-const path = require('path')
-const core = require('@actions/core')
-const github = require('@actions/github')
-const dayjs = require('dayjs')
+import {join, parse} from 'path'
+import {context, getOctokit} from '@actions/github'
+import {getInput, setFailed, setOutput} from '@actions/core'
+import dayjs from 'dayjs'
+import Report from './report.js'
 
-const Report = require('./report')
-
-const run = async () => {
+// run
+;(async () => {
   try {
-    const reportPath = core.getInput('report_path', {required: false}) || 'invitation-report.csv'
-    const committerName = core.getInput('committer_name', {required: false}) || 'invitation-reporter[bot]'
-    const committerEmail = core.getInput('committer_email', {required: false}) || 'invitation@reporter'
+    const reportPath = getInput('report_path', {required: false}) || 'invitation-report.csv'
+    const committerName = getInput('committer_name', {required: false}) || 'invitation-reporter[bot]'
+    const committerEmail = getInput('committer_email', {required: false}) || 'invitation@reporter'
 
-    const filePath = path.join(process.env.GITHUB_WORKSPACE, reportPath)
-    const {dir} = path.parse(filePath)
+    const filePath = join(process.env.GITHUB_WORKSPACE, reportPath)
+    const {dir} = parse(filePath)
 
     if (dir.indexOf(process.env.GITHUB_WORKSPACE) < 0) {
       throw new Error(`${reportPath} is not an allowed path`)
     }
 
-    const enterprise = core.getInput('enterprise', {required: false})
-    const token = core.getInput('token', {required: true})
-    const octokit = await new github.getOctokit(token)
+    const enterprise = getInput('enterprise', {required: false})
+    const token = getInput('token', {required: true})
+    const octokit = await new getOctokit(token)
 
-    const {owner, repo} = github.context.repo
+    const {owner, repo} = context.repo
 
     const report = new Report(octokit, {
       fp: reportPath,
@@ -35,11 +35,9 @@ const run = async () => {
     report.reportDate = dayjs().toISOString()
     const {before, after} = await report.create()
 
-    core.setOutput('base_sha', before)
-    core.setOutput('head_sha', after)
+    setOutput('base_sha', before)
+    setOutput('head_sha', after)
   } catch (error) {
-    core.setFailed(error.message)
+    setFailed(error.message)
   }
-}
-
-module.exports = {run}
+})()

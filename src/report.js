@@ -1,5 +1,6 @@
-const dayjs = require('dayjs')
-const stringify = require('csv-stringify/lib/sync')
+import dayjs from 'dayjs'
+// eslint-disable-next-line import/no-unresolved
+import {stringify} from 'csv-stringify/sync'
 
 /**
  * @typedef Invitation
@@ -38,7 +39,11 @@ const stringify = require('csv-stringify/lib/sync')
  * @property {String} head_sha
  */
 
-class Report {
+/**
+ * @exports
+ * @type {Report}
+ */
+export default class Report {
   /**
    * @param {import('@octokit/core').Octokit} octokit
    * @param {Object} options              Report options
@@ -284,5 +289,3 @@ class Report {
     this.date = date
   }
 }
-
-module.exports = Report

@@ -1,10 +1,13 @@
+import {jest} from '@jest/globals'
+
+// eslint-disable-next-line import/no-unresolved
+import {stringify} from 'csv-stringify/sync'
+import Report from '../src/report.js'
+
 jest.mock('@actions/github')
+jest.mock('../src/report.js')
 
-const github = require('@actions/github')
-const stringify = require('csv-stringify/lib/sync')
-const Report = require('../src/report')
-
-github.getOctokit = jest.fn().mockReturnValue({
+const getOctokit = jest.fn().mockReturnValue({
   log: {
     info: jest.fn(),
   },
@@ -44,7 +47,7 @@ describe('report.js', () => {
   let now
 
   beforeEach(() => {
-    octokit = new github.getOctokit('token')
+    octokit = new getOctokit('token')
 
     options = {
       fp: 'report.csv',

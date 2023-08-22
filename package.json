@@ -2,11 +2,15 @@
   "name": "ghec-invitations-report-action",
   "version": "3.1.1",
   "description": "GitHub Action to create a report of GitHub Enterprise Cloud invitations",
-  "keywords": [],
+  "keywords": [
+    "github-enterprise-cloud",
+    "github-actions",
+    "report"
+  ],
   "author": {
-    "name": "GitHub Professional Services",
+    "name": "GitHub Expert Services",
     "email": "services@github.com",
-    "url": "https://services.github.com"
+    "url": "https://github.com/services"
   },
   "contributors": [
     {
@@ -16,16 +20,7 @@
     }
   ],
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/ActionsDesk/ghec-invitations-report-action.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ActionsDesk/ghec-invitations-report-action/issues"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
+  "repository": "github:ActionsDesk/ghec-invitations-report-action",
   "engines": {
     "node": ">=14",
     "npm": ">=7"

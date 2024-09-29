@@ -23,8 +23,8 @@
   "license": "MIT",
   "repository": "github:ActionsDesk/ghec-invitations-report-action",
   "engines": {
-    "node": ">=16",
-    "npm": ">=8"
+    "node": ">=20",
+    "npm": ">=10"
   },
   "main": "index.js",
   "scripts": {

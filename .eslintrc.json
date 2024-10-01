@@ -1,7 +1,7 @@
 {
   "parserOptions": {
-    "ecmaVersion": 12,
-    "sourceType": "script"
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
   "env": {
     "es6": true,
@@ -11,10 +11,14 @@
   "plugins": ["github", "jest"],
   "extends": ["plugin:github/recommended"],
   "rules": {
-    "camelcase": "off",
-    "filenames/match-regex": "off",
+    "camelcase": [
+      "error",
+      {
+        "allow": [""]
+      }
+    ],
+    "i18n-text/no-en": "off",
     "import/extensions": "off",
-    "import/no-commonjs": "off",
-    "i18n-text/no-en": "off"
+    "no-console": "off"
   }
 }

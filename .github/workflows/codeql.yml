@@ -15,11 +15,6 @@ jobs:
       contents: read
       security-events: write
 
-    env:
-      CI: true
-      LGTM_INDEX_FILTERS: |
-        exclude:*/dist/*
-
     strategy:
       fail-fast: false
       matrix:
@@ -30,6 +25,7 @@ jobs:
 
       - uses: github/codeql-action/init@e2b3eafc8d227b0241d48be5f425d47c2d750a13 # v3.26.10
         with:
+          config-file: ./.github/codeql/codeql-config.yml
           languages: ${{ matrix.language }}
 
       - uses: github/codeql-action/autobuild@e2b3eafc8d227b0241d48be5f425d47c2d750a13 # v3.26.10

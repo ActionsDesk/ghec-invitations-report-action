@@ -17,7 +17,7 @@ outputs:
   base_sha:
     description: 'Report base SHA'
   head_sha:
-    description: 'Report head SHA'
+     description: 'Report head SHA'
 
 runs:
   using: 'node20'

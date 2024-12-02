@@ -37,15 +37,15 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "csv-stringify": "^6.5.1",
+    "csv-stringify": "^6.5.2",
     "dayjs": "^1.11.13"
   },
   "devDependencies": {
     "@github/prettier-config": "^0.0.6",
-    "eslint": "^8.47.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-github": "^5.0.2",
-    "eslint-plugin-jest": "^28.8.3",
+    "eslint-plugin-github": "^5.1.3",
+    "eslint-plugin-jest": "^28.9.0",
     "eslint-plugin-markdown": "^5.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.7",

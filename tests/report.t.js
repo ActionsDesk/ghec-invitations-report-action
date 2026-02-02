@@ -2,7 +2,7 @@ import {jest} from '@jest/globals'
 import {stringify} from 'csv-stringify/sync'
 import Report from '../src/report.js'
 
-jest.mock('@actions/github')
+jest.mock('@actions/github', () => ({getOctokit: jest.fn()}), {virtual: true})
 jest.mock('../src/report.js')
 
 const getOctokit = jest.fn().mockReturnValue({

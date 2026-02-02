@@ -10,10 +10,18 @@ jobs:
   codeql:
     runs-on: ubuntu-latest
 
+    concurrency:
+      group: codeql-${{ github.ref }}
+      cancel-in-progress: true
+
     permissions:
       actions: read
       contents: read
       security-events: write
+
+    env:
+      CI: true
+      LGTM_INDEX_FILTERS: 'exclude:dist/*'
 
     strategy:
       fail-fast: false
@@ -25,9 +33,8 @@ jobs:
 
       - uses: github/codeql-action/init@b20883b0cd1f46c72ae0ba6d1090936928f9fa30 # v4.32.0
         with:
-          config-file: ./.github/codeql/codeql-config.yml
           languages: ${{ matrix.language }}
-          setup: advanced
+          config-file: ./.github/codeql/codeql-config.yml
 
       - uses: github/codeql-action/autobuild@b20883b0cd1f46c72ae0ba6d1090936928f9fa30 # v4.32.0
 

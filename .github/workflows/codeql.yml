@@ -27,6 +27,7 @@ jobs:
         with:
           config-file: ./.github/codeql/codeql-config.yml
           languages: ${{ matrix.language }}
+          setup: advanced
 
       - uses: github/codeql-action/autobuild@b20883b0cd1f46c72ae0ba6d1090936928f9fa30 # v4.32.0
 
